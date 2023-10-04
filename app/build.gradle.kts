@@ -58,9 +58,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:dimension"))
-    implementation(project(":core:data"))
-
     implementation(libs.androidx.core)
     implementation(libs.androidx.lifecycle)
     implementation(libs.androidx.activity)
@@ -82,7 +79,9 @@ dependencies {
     //dagger
     implementation(libs.com.google.dagger.hilt.android)
     kapt(libs.com.google.dagger.hilt.android.compiler)
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
     //pdf viewer
     implementation("com.github.barteksc:android-pdf-viewer:2.8.2")
+    implementation("jp.wasabeef:blurry:4.0.1")
 }
