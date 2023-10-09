@@ -1,6 +1,7 @@
 package com.longhrk.app.ui.screen
 
 import android.graphics.Color
+import android.net.Uri
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.compose.foundation.background
@@ -55,15 +56,15 @@ fun PDFOffLineScreen(
 ) {
     val scope = rememberCoroutineScope()
     val view = LocalView.current
-    val inputStreamPDF by viewModel.inputStreamPDF.collectAsState()
+    val uriPDF by viewModel.uriPDF.collectAsState()
 
     var showLoading by remember {
         mutableStateOf(true)
     }
 
     LaunchedEffect(key1 = Unit, block = {
-        if (inputStreamPDF == null) {
-            showLoading = false
+        if (uriPDF == Uri.EMPTY) {
+            showLoading = true
         }
     })
 
@@ -175,7 +176,7 @@ fun PDFOffLineScreen(
                         )
                         scope.launch {
                             withContext(Dispatchers.Main) {
-                                fromStream(inputStreamPDF)
+                                fromUri(uriPDF)
                                     .onError { showLoading = true }
                                     .load()
                             }

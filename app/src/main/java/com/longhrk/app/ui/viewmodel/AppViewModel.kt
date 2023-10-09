@@ -1,16 +1,16 @@
 package com.longhrk.app.ui.viewmodel
 
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import java.io.InputStream
 import javax.inject.Inject
 
 @HiltViewModel
 class AppViewModel @Inject constructor() : ViewModel() {
-    private var _inputStreamPDF = MutableStateFlow<InputStream?>(null)
-    val inputStreamPDF = _inputStreamPDF
+    private var _uriPDF = MutableStateFlow<Uri>(Uri.EMPTY)
+    val uriPDF = _uriPDF
 
     private var _linkPDFFile = MutableStateFlow("")
     val linkPDFFile = _linkPDFFile.asStateFlow()
@@ -26,7 +26,7 @@ class AppViewModel @Inject constructor() : ViewModel() {
         _linkPDFFile.value = url
     }
 
-    fun updateInputStreamPDF(inputStream: InputStream) {
-        _inputStreamPDF.value = inputStream
+    fun updateUriPDF(uri: Uri) {
+        _uriPDF.value = uri
     }
 }

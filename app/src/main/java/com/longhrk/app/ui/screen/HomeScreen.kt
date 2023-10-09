@@ -56,7 +56,6 @@ import com.longhrk.app.ui.theme.itemInComponentColor
 import com.longhrk.app.ui.theme.textColor
 import com.longhrk.app.ui.viewmodel.AppViewModel
 import jp.wasabeef.blurry.Blurry
-import java.io.InputStream
 
 @SuppressLint("Recycle")
 @Composable
@@ -88,16 +87,8 @@ fun HomeScreen(
 
     LaunchedEffect(key1 = uriPDF, block = {
         if (uriPDF != Uri.EMPTY) {
-            val inputStream: InputStream? = try {
-                context.contentResolver.openInputStream(uriPDF)
-            } catch (ex: Exception) {
-                null
-            }
-
-            if (inputStream != null) {
-                viewModel.updateInputStreamPDF(inputStream)
-                onPDFOffLineScreen()
-            }
+            viewModel.updateUriPDF(uriPDF)
+            onPDFOffLineScreen()
         }
     })
 
