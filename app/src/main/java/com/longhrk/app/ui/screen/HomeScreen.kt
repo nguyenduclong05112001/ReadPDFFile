@@ -87,7 +87,9 @@ fun HomeScreen(
     val launcherGetPDFFile = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent(),
         onResult = { uri ->
-            uriPDF = uri
+            if (uri != null) {
+                uriPDF = uri
+            }
         }
     )
 
@@ -99,6 +101,10 @@ fun HomeScreen(
     })
 
     BackHandler {
+        if (statusInputNetwork) {
+            viewModel.updateStateInputNetWork(false)
+            return@BackHandler
+        }
         if (backPressTime + 1500 > System.currentTimeMillis()) {
             onBackPress()
         } else {
