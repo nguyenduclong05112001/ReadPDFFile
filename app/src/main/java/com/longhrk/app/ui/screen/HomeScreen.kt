@@ -184,11 +184,7 @@ fun HomeScreen(
                 )
             }
 
-            Spacer(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f)
-            )
+            Spacer(modifier = Modifier.fillMaxWidth().weight(1f))
         }
 
         Icon(

@@ -21,5 +21,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "BaseCode"
+rootProject.name = "ReadPDF"
 include(":app")
