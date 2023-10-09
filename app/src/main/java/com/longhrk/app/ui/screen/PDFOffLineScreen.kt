@@ -59,7 +59,7 @@ fun PDFOffLineScreen(
     val uriPDF by viewModel.uriPDF.collectAsState()
 
     var showLoading by remember {
-        mutableStateOf(true)
+        mutableStateOf(false)
     }
 
     LaunchedEffect(key1 = Unit, block = {

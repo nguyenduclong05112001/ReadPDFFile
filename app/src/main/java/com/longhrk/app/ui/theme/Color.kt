@@ -9,5 +9,5 @@ val Teal200 = Color(0xFF03DAC5)
 
 val textColor = Color(0xFF020202)
 val backgroundColor = Color(0xFFFCF8F8)
-val componentColor = Color(0xFF5DBEE9)
+val componentColor = Color(0xFF4CAF50)
 val itemInComponentColor = Color(0xFFFAFAFA)

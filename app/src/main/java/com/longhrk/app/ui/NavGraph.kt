@@ -11,6 +11,7 @@ import com.longhrk.app.ui.event.NavEvent
 import com.longhrk.app.ui.screen.HomeScreen
 import com.longhrk.app.ui.screen.PDFOffLineScreen
 import com.longhrk.app.ui.screen.PDFOnLineScreen
+import com.longhrk.app.ui.screen.SettingScreen
 import com.longhrk.app.ui.screen.SplashScreen
 import com.longhrk.app.ui.viewmodel.AppViewModel
 
@@ -37,6 +38,14 @@ fun NavGraph(eventHandler: EventHandler, navController: NavHostController) {
         composable(NavTarget.Home.route) {
             HomeScreen(
                 viewModel = viewModel,
+
+                onSettingScreen = {
+                    eventHandler.postNavEvent(
+                        event = NavEvent.Action(
+                            target = NavTarget.Setting
+                        )
+                    )
+                },
 
                 onPDFOnLineScreen = {
                     eventHandler.postNavEvent(
@@ -75,6 +84,16 @@ fun NavGraph(eventHandler: EventHandler, navController: NavHostController) {
             PDFOffLineScreen(
                 viewModel = viewModel,
                 onBackPress = {
+                    eventHandler.postNavEvent(
+                        event = NavEvent.PopBackStack()
+                    )
+                },
+            )
+        }
+
+        composable(NavTarget.Setting.route) {
+            SettingScreen(
+                onBackScreen = {
                     eventHandler.postNavEvent(
                         event = NavEvent.PopBackStack()
                     )

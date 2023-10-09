@@ -6,6 +6,7 @@ sealed class NavTarget(val route: String) {
     object Home : NavTarget("home")
     object PDFOnLine : NavTarget("pdf_online")
     object PDFOffLine : NavTarget("pdf_offline")
+    object Setting : NavTarget("setting")
 
     override fun toString(): String {
         return route

@@ -83,5 +83,8 @@ dependencies {
 
     //pdf viewer
     implementation("com.github.barteksc:android-pdf-viewer:2.8.2")
+
     implementation("jp.wasabeef:blurry:4.0.1")
+
+    implementation("com.airbnb.android:lottie-compose:6.1.0")
 }

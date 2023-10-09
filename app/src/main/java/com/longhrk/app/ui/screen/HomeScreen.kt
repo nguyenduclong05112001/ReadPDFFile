@@ -49,6 +49,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.animateLottieCompositionAsState
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.longhrk.app.R
 import com.longhrk.app.ui.theme.backgroundColor
 import com.longhrk.app.ui.theme.componentColor
@@ -63,6 +68,7 @@ fun HomeScreen(
     viewModel: AppViewModel,
     onPDFOnLineScreen: () -> Unit,
     onPDFOffLineScreen: () -> Unit,
+    onSettingScreen: () -> Unit,
     onBackPress: () -> Unit
 ) {
     val notifyBackOutApp = stringResource(id = R.string.notify_back_out_app)
@@ -101,6 +107,22 @@ fun HomeScreen(
         backPressTime = System.currentTimeMillis()
     }
 
+    val animationPresent by rememberLottieComposition(
+        spec = LottieCompositionSpec.RawRes(R.raw.home_screen)
+    )
+
+    val isPlaying by remember {
+        mutableStateOf(true)
+    }
+
+    val progress by animateLottieCompositionAsState(
+        composition = animationPresent,
+        iterations = LottieConstants.IterateForever,
+        isPlaying = isPlaying,
+        restartOnPlay = false
+    )
+
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -112,10 +134,16 @@ fun HomeScreen(
             .background(backgroundColor)
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.Bottom
+            modifier = Modifier.fillMaxSize(),
         ) {
+            LottieAnimation(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(6f),
+                composition = animationPresent,
+                progress = { progress },
+            )
+
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -150,8 +178,22 @@ fun HomeScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.height(100.dp))
+            Spacer(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+            )
         }
+
+        Icon(
+            modifier = Modifier
+                .padding(start = 10.dp, top = 10.dp)
+                .clickable(onClick = onSettingScreen)
+                .size(50.dp),
+            painter = painterResource(id = R.drawable.ic_menu),
+            tint = componentColor,
+            contentDescription = null
+        )
 
         if (statusInputNetwork) {
             Box(modifier = Modifier.fillMaxSize()) {
